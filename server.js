@@ -6,6 +6,7 @@ const cors = require('cors'); //Providing a Connect/Express middleware that can 
 
 const testRoutes = require('./api/routes/testRoutes');
 const backupRoutes = require('./api/routes/backupRoutes');
+const importRoutes = require('./api/routes/importRoutes');
 
 app = express();
 app.use(cors());
