@@ -12,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/test', testRoutes)
 app.use('/backup', backupRoutes);
+app.use('/import', importRoutes);
 
 //connect to DB
 mongoose.connect(
