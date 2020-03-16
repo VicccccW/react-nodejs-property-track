@@ -29,11 +29,11 @@ router.post('/', async (req, res) => {
 });
 
 //get one Property based on mongoDB Id
-router.get('/:propertyId', async (req, res) => {
+router.get('/:propertyUuid', async (req, res) => {
     console.log("request in test get");
-    console.log("req id is " + req.params.propertyId);
+    console.log("req uuid is " + req.params.propertyUuid);
     try {
-        const property = await Property.findById(req.params.propertyId);
+        const property = await Property.findOne({ uuid: req.params.propertyUuid });
         res.json(property);
     } catch(err) {
         res.json({message: err});
