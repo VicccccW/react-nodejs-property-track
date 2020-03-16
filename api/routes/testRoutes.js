@@ -7,7 +7,6 @@ const Property = require('../models/propertyModel');
 //create one Property
 router.post('/', async (req, res) => {
     console.log('request in test post');
-    console.log('req is ' + req);
     const property = new Property({
         estMaxPrice: req.body.estMaxPrice,
         estMinPrice: req.body.estMinPrice,

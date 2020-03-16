@@ -8,7 +8,6 @@ const Property = require('../models/propertyModel');
 //and wants to back up these data in MongoDB
 router.post('/', async (req, res) => {
     console.log("request in backup put ");
-    console.log(req.body);
 
     try {
         //after get request 
