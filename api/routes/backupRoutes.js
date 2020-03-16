@@ -61,12 +61,32 @@ function buildUpsertOneStructure(property) {
 
     structure.updateOne.filter.uuid = property.UUID__c;
 
+    if(property.City__c != undefined) {
+        structure.updateOne.update.city = property.City__c;
+    };
+
+    if(property.Country__c != undefined) {
+        structure.updateOne.update.country = property.Country__c;
+    };
+
+    if(property.CountryCode__c != undefined) {
+        structure.updateOne.update.countryCode = property.CountryCode__c;
+    };
+
     if(property.Est_Max_Price__c != undefined) {
         structure.updateOne.update.estMaxPrice = property.Est_Max_Price__c;
     };
 
     if(property.Est_Min_Price__c != undefined) {
         structure.updateOne.update.estMinPrice = property.Est_Min_Price__c;
+    };
+
+    if(property.Geolocation__Latitude__s != undefined) {
+        structure.updateOne.update.latitude = property.Geolocation__Latitude__s;
+    };
+
+    if(property.Geolocation__Longitude__s != undefined) {
+        structure.updateOne.update.longitude = property.Geolocation__Longitude__s;
     };
 
     if(property.Has_Sold__c != undefined) {
@@ -93,12 +113,28 @@ function buildUpsertOneStructure(property) {
         structure.updateOne.update.noOfRooms = property.No_of_Rooms__c;
     }; 
 
+    if(property.Postalcode__c != undefined) {
+        structure.updateOne.update.postalcode = property.Postalcode__c;
+    };
+
     // we assume the Salesforce Id field will to be sent anyway
     structure.updateOne.update.salesforceId = property.Id;
     
     if(property.Sold_Price__c != undefined) {
         structure.updateOne.update.soldPrice = property.Sold_Price__c;
     }; 
+
+    if(property.State__c != undefined) {
+        structure.updateOne.update.state = property.State__c;
+    };
+
+    if(property.Street__c != undefined) {
+        structure.updateOne.update.street = property.Street__c;
+    };
+
+    if(property.Suburb__c != undefined) {
+        structure.updateOne.update.suburb = property.Suburb__c;
+    };
 
     structure.updateOne.update.uuid = property.UUID__c;
 

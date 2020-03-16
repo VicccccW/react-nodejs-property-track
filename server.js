@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv/config'); //Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.
 const bodyParser = require('body-parser'); //Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 const cors = require('cors'); //Providing a Connect/Express middleware that can be used to enable CORS
+//require('dotenv/config'); //Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.
+const dotenv = require('dotenv');
+dotenv.config();
 
 const testRoutes = require('./api/routes/testRoutes');
 const backupRoutes = require('./api/routes/backupRoutes');
