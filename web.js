@@ -17,6 +17,10 @@ app.use('/test', testRoutes)
 app.use('/backup', backupRoutes);
 app.use('/import', importRoutes);
 
+app.get('/', (req, res) => {
+    res.send('IN CONSTRUCTION...');
+})
+
 //connect to DB
 mongoose.connect(
     process.env.MONGODB_URI, 
