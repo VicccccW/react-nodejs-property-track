@@ -32,4 +32,4 @@ port = process.env.PORT || 3000;
 
 app.listen(port);
 
-console.log('sf-mongodb RESTful API server started on port: ' + port);
+console.log('API server started on port: ' + port);
