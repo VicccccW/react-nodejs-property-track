@@ -18,7 +18,7 @@ app.use('/backup', backupRoutes);
 app.use('/import', importRoutes);
 
 app.get('/', (req, res) => {
-    res.send('IN CONSTRUCTION...COMING SOON...STAY TUNED...');
+    res.send('COMING SOON...STAY TUNED...');
 })
 
 //connect to DB
