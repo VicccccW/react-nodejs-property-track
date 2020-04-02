@@ -14,9 +14,6 @@ build
 # cert
 cert
 
-# slds
-client/public/assets
-
 # misc
 .DS_Store
 .env.local
