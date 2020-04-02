@@ -22,23 +22,21 @@ const oauth2 = new jsforce.OAuth2({
 function getSession(req, res) {
   console.log('123456 old session????');
   console.log(req.sessionID);
-  console.log(req.session.Id);
 
 
-  const sessionId = req.sessionId;
+  const sessionID = req.sessionID;
 
 
-  // if (sessionId) {
-  //   res.status(401).json('No active session.');
-  //   return null;
-  // }
+  if (sessionID) {
+    res.status(401).json('No active sessionID.');
+    return null;
+  }
 
-  const session = req.sessionStore.session[sessionId];
+  const session = req.sessionStore.session[sessionID];
 
   console.log('123 old session????');
 
   console.log(req.sessionID);
-  console.log(req.session.id);
   console.log(req.session);
 
 
