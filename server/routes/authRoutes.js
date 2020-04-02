@@ -32,7 +32,6 @@ function getSession(req, res) {
 
   console.log('123 old session????');
 
-  console.log(req);
   console.log(req.sessionID);
   console.log(req.session.id);
   console.log(req.session);
@@ -104,7 +103,6 @@ router.get('/callback', (req, res) => {
 
     console.log('456');
 
-    console.log(req);
     console.log(req.sessionID);
     console.log(req.session.id);
     console.log(req.session);
