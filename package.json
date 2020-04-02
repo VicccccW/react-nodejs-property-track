@@ -1,28 +1,43 @@
 {
-  "name": "nodejs-property-sf-mgdb-bkup",
+  "name": "react-nodejs-express-heroku-sf-integration",
   "version": "1.0.0",
-  "description": "This nodejs app is used as a middleware to connect Salesforce and MongoDB, Salesforce call this nodejs api, and this node will call Salesforce API.",
-  "main": "web.js",
+  "description": "This app is used to demostrate the integration of React frontend, node backend, Heroku PaaS, and Salesforce SaaS.",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon web.js"
+    "start": "node server.js",
+    "server-dev": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "client-dev": "npm run start-dev --prefix client",
+    "client-install": "npm install --prefix client",
+    "client-build": "npm run build --prefix client",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [
     "sfdx",
     "nodejs",
-    "heroku"
+    "heroku",
+    "react",
+    "express"
   ],
   "author": "Victor Wang",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "concurrently": "^5.1.0",
+    "http-proxy-middleware": "^1.0.3",
+    "nodemon": "^2.0.2",
+    "redux-devtools-extension": "^2.13.8"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.3"
+    "express-session": "^1.17.0",
+    "jsforce": "^1.9.3",
+    "mongoose": "^5.9.3",
+    "request": "^2.88.2"
   },
   "engines": {
     "node": "13.x"

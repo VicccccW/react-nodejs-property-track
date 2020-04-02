@@ -1,0 +1,58 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "react-app-rewired start",
+    "start-dev": "HTTPS=true SSL_CRT_FILE=../cert/server.crt SSL_KEY_FILE=../cert/server.key react-app-rewired start",
+    "start-http": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
+  },
+  "keywords": [
+    "sfdx",
+    "nodejs",
+    "heroku",
+    "react",
+    "express"
+  ],
+  "author": "Victor Wang",
+  "license": "MIT",
+  "devDependencies": {
+    "http-proxy-middleware": "^1.0.3",
+    "react-app-rewired": "^2.1.5",
+    "redux-devtools-extension": "^2.13.8"
+  },
+  "dependencies": {
+    "@salesforce-ux/design-system": "^2.11.6",
+    "@salesforce/design-system-react": "^0.10.18",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.1",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "request": "^2.88.2"
+  },
+  "engines": {
+    "node": "13.x"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

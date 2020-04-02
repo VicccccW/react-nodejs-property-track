@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+}
+
+.slds-brand-band.dsr-brand-band_lightning-blue:before {
+  background-image: url(/assets/images/themes/oneSalesforce/banner-brand-default.png),
+    linear-gradient(to top, rgba(175, 197, 222, 0) 0, #1b5f9e);
+}
+
+.slds-brand-band.dsr-brand-band_lightning-blue:after {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(175, 197, 222, 0) 60%,
+    #afc5de
+  );
+}
