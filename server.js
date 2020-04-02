@@ -41,7 +41,7 @@ app.use(sessionHandler);
 
 //define route
 const apiRoutes = require('./server/routes/apiRoutes');
-app.use('/api', apiRoutes);
+app.use('/api', sessionHandler, apiRoutes);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

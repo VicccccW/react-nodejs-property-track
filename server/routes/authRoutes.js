@@ -24,7 +24,11 @@ function getSession(req, res) {
 
   console.log('123');
 
+  console.log(req);
+  console.log(req.sessionID);
+  console.log(req.session.id);
   console.log(req.session);
+
 
   if (!session.sfdcAuth) {
     res.status(401).json('No active session.');
@@ -92,8 +96,10 @@ router.get('/callback', (req, res) => {
 
     console.log('456');
 
+    console.log(req);
+    console.log(req.sessionID);
+    console.log(req.session.id);
     console.log(req.session);
-    console.log(res.session);
 
     if (process.env.NODE_ENV === 'production') {
       return res.redirect('/user?valid=' + encodeStr);
