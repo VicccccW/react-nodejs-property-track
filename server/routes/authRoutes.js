@@ -20,13 +20,18 @@ const oauth2 = new jsforce.OAuth2({
  *  If there is no session, redirects with HTTP 401 and an error message
  */
 function getSession(req, res) {
-  const sessionId = req.sessionID;
+  console.log('123456 old session????');
+  console.log(req.sessionID);
+  console.log(req.session.Id);
 
 
-  if (sessionId) {
-    res.status(401).json('No active session.');
-    return null;
-  }
+  const sessionId = req.sessionId;
+
+
+  // if (sessionId) {
+  //   res.status(401).json('No active session.');
+  //   return null;
+  // }
 
   const session = req.sessionStore.session[sessionId];
 
