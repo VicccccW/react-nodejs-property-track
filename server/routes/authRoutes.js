@@ -22,7 +22,9 @@ const oauth2 = new jsforce.OAuth2({
 function getSession(req, res) {
   const session = req.session;
 
-  console.log(req.sfdcAuth);
+  console.log('123');
+
+  console.log(req.session.sfdcAuth);
 
   if (!session.sfdcAuth) {
     res.status(401).json('No active session.');
