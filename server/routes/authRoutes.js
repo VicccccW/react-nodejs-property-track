@@ -22,6 +22,8 @@ const oauth2 = new jsforce.OAuth2({
 function getSession(req, res) {
   const session = req.session;
 
+  console.log(req.sfdcAuth);
+
   if (!session.sfdcAuth) {
     res.status(401).json('No active session.');
     return null;
@@ -86,12 +88,14 @@ router.get('/callback', (req, res) => {
     //return res.redirect('/index.html');
     const encodeStr = encodeURIComponent('true');
 
+    console.log(req.session);
+
     if (process.env.NODE_ENV === 'production') {
-      res.redirect('/user?valid=' + encodeStr);
+      return res.redirect('/user?valid=' + encodeStr);
     } else if (process.env.NODE_ENV === 'development') {
-      res.redirect('https://localhost:3000/user?valid=' + encodeStr);
+      return res.redirect('https://localhost:3000/user?valid=' + encodeStr);
     } else {
-      res.redirect('https://localhost:3000/user?valid=' + encodeStr);
+      return res.redirect('https://localhost:3000/user?valid=' + encodeStr);
     }
   });
 });
@@ -103,7 +107,6 @@ router.get('/whoami', (req, res) => {
   const session = getSession(req, res);
 
   if (session == null) {
-    console.log('No active session.');
     return;
   }
 
