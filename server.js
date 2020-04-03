@@ -17,12 +17,12 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, '/client/public')));
 }
 
-//setup port constants
-const port_redis = process.env.PORT || 6379;
-const port = process.env.PORT || 9000;
+// //setup port constants
+// const port_redis = process.env.PORT || 6379;
+// const port = process.env.PORT || 9000;
 
-//configure redis client on port 6379
-const redis_client = redis.createClient(port_redis);
+// //configure redis client on port 6379
+// const redis_client = redis.createClient(port_redis);
 
 // const redisClient = redis.createClient('6379', 'localhost');
 // redisClient.on('connect', () => console.log('Redis client connected'));
@@ -35,12 +35,6 @@ app.use(express.urlencoded({ extended: true }));
 
 //initialize session
 const sessionHandler = session({
-    // store:
-    //     process.env.NODE_ENV === 'production'
-    //         ? new RedisStore({
-    //             url: process.env.REDIS_URL
-    //         })
-    //         : new RedisStore(),
     name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET_KEY,
     cookie: { secure: process.env.ISHTTPS === 'true' },
@@ -48,6 +42,12 @@ const sessionHandler = session({
     saveUninitialized: false
 });
 //    store: new RedisStore({ client: redisClient }),
+// store:
+//     process.env.NODE_ENV === 'production'
+//         ? new RedisStore({
+//             url: process.env.REDIS_URL
+//         })
+//         : new RedisStore(),
 
 //use sessionMiddlware (app.use) before using session.
 app.use(sessionHandler);
