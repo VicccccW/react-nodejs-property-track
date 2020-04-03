@@ -84,7 +84,7 @@ router.get('/callback', (req, res) => {
 
     console.log('in callback');
 
-    console.log(res);
+    console.log(req);
 
     // Redirect to app main page
     //return res.redirect('/index.html');
