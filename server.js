@@ -18,8 +18,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // //setup port constants
-// const port_redis = process.env.PORT || 6379;
-// const port = process.env.PORT || 9000;
+const port_redis = process.env.PORT || 6379;
+const port = process.env.PORT || 9000;
 
 // //configure redis client on port 6379
 // const redis_client = redis.createClient(port_redis);
