@@ -37,6 +37,7 @@
     "express-session": "^1.17.0",
     "jsforce": "^1.9.3",
     "mongoose": "^5.9.3",
+    "redis": "^3.0.2",
     "request": "^2.88.2"
   },
   "engines": {

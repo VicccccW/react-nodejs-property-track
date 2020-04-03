@@ -20,25 +20,7 @@ const oauth2 = new jsforce.OAuth2({
  *  If there is no session, redirects with HTTP 401 and an error message
  */
 function getSession(req, res) {
-  console.log('123456 old session????');
-  console.log(req.sessionID);
-
-
-  const sessionID = req.sessionID;
-
-
-  if (sessionID) {
-    res.status(401).json('No active sessionID.');
-    return null;
-  }
-
-  const session = req.sessionStore.session[sessionID];
-
-  console.log('123 old session????');
-
-  console.log(req.sessionID);
-  console.log(req.session);
-
+  const session = req.session;
 
   if (!session.sfdcAuth) {
     res.status(401).json('No active session.');
@@ -100,15 +82,13 @@ router.get('/callback', (req, res) => {
       refreshToken: conn.refreshToken
     };
 
+    console.log('in callback');
+
+    console.log(res);
+
     // Redirect to app main page
     //return res.redirect('/index.html');
     const encodeStr = encodeURIComponent('true');
-
-    console.log('456');
-
-    console.log(req.sessionID);
-    console.log(req.session.id);
-    console.log(req.session);
 
     if (process.env.NODE_ENV === 'production') {
       return res.redirect('/user?valid=' + encodeStr);
@@ -127,6 +107,7 @@ router.get('/whoami', (req, res) => {
   const session = getSession(req, res);
 
   if (session == null) {
+    console.log('No active session.');
     return;
   }
 
