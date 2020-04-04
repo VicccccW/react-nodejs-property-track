@@ -25,8 +25,8 @@ const port = process.env.PORT || 9000;
 //configure redis client on port 6379
 //const redisClient = redis.createClient();
 //const redisClient = redis.createClient('6379', 'localhost');
-redisClient().on('connect', () => console.log('Redis client connected'));
-redisClient().on('error', () => console.log('Something went wrong ' + err));
+redisClient.on('connect', () => console.log('Redis client connected'));
+redisClient.on('error', () => console.log('Something went wrong ' + err));
 
 //initialize session
 //60 * 60 * 1000 is 1 hour
