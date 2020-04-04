@@ -1,12 +1,9 @@
-'use strict';
-
 const dotenv = require('dotenv');
 dotenv.config();
 
 const express = require('express');
 const router = express.Router();
 const jsforce = require('jsforce');
-const redisClient = require('../redisClient');
 
 // Instantiate Salesforce client with .env configuration
 const oauth2 = new jsforce.OAuth2({
@@ -26,7 +23,7 @@ function getSession(req, res) {
 
   if (!session.sfdcAuth) {
     res.status(401).json('No active session.');
-    return null;
+    return;
   }
 
   return session;
@@ -86,17 +83,9 @@ router.get('/callback', (req, res) => {
     };
 
     // Redirect to app main page
-    //return res.redirect('/index.html');
     const encodeStr = encodeURIComponent('true');
 
-    if (process.env.NODE_ENV === 'production') {
-      return res.redirect('/');
-      //return res.redirect('/');
-    } else if (process.env.NODE_ENV === 'development') {
-      return res.redirect('/');
-    } else {
-      return res.redirect('/');
-    }
+    return res.redirect('/');
   });
 });
 
@@ -114,7 +103,7 @@ router.get('/whoami', (req, res) => {
   // Request session info from Salesforce
   const conn = resumeSalesforceConnection(session);
 
-  conn.identity(function (error, response) {
+  conn.identity((error, response) => {
     if (error) {
       return console.error(error);
     }
@@ -138,21 +127,13 @@ router.get('/logout', async (req, res) => {
     }
 
     // Destroy server-side session
-    session.destroy(function (err) {
+    session.destroy((err) => {
       if (err) {
         console.error('Salesforce session destruction error: ' + JSON.stringify(err));
       }
     });
 
-    // Redirect to app main page
-    //TODO: can we use??? res.render('index.html');
-    if (process.env.NODE_ENV === 'production') {
-      return res.json('Success');
-    } else if (process.env.NODE_ENV === 'development') {
-      return res.json('Success');
-    } else {
-      return res.json('Success');
-    }
+    return res.json('Success');
   });
 });
 

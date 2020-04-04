@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const router = express.Router();
 const Property = require('../models/propertyModel');
@@ -10,8 +8,8 @@ router.get('/', async (req, res) => {
         //find() is a method of mongoose, if no parameter, return all
         const properties = await Property.find();
         res.json(properties);
-    } catch(err) {
-        res.json({message: err});
+    } catch (err) {
+        res.json({ message: err });
     }
 });
 
