@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRequestSuccess } from "../../redux/auth/authActions";
 import Button from "@salesforce/design-system-react/components/button";
@@ -9,6 +10,8 @@ function LoginPanel() {
   const dispatch = useDispatch();
 
   let isLoggedIn = useSelector(state => state.auth.loggedIn);
+
+  const history = useHistory();
 
   async function fetchLogout() {
     const res = await fetch('/api/auth/logout');
@@ -30,6 +33,7 @@ function LoginPanel() {
     fetchLogout()
       .then(res => {
         dispatch(logoutRequestSuccess());
+        history.push("/");
       })
       .catch(err => console.log(err));
   };
