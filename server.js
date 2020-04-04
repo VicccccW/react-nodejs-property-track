@@ -28,6 +28,12 @@ const port = process.env.PORT || 9000;
 redisClient.on('connect', () => console.log('Redis client connected'));
 redisClient.on('error', () => console.log('Something went wrong ' + err));
 
+app.use(cors());
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.disable('x-powered-by');
+
 //initialize session
 //60 * 60 * 1000 is 1 hour
 const sessionHandler = session({
@@ -39,14 +45,9 @@ const sessionHandler = session({
     saveUninitialized: false
 });
 
-app.use(cors());
-app.use(cookieParser(process.env.SESSION_SECRET_KEY))
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.disable('x-powered-by');
-
 //use sessionMiddlware (app.use) before using session.
 //the express session uses cookies, so the cookie object needs to be present before it can use the session.
+app.set('trust proxy', 1);
 app.use(sessionHandler);
 
 //define route
