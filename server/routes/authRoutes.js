@@ -6,6 +6,7 @@ dotenv.config();
 const express = require('express');
 const router = express.Router();
 const jsforce = require('jsforce');
+const redisClient = require('../redisClient');
 
 // Instantiate Salesforce client with .env configuration
 const oauth2 = new jsforce.OAuth2({
@@ -20,10 +21,33 @@ const oauth2 = new jsforce.OAuth2({
  *  If there is no session, redirects with HTTP 401 and an error message
  */
 function getSession(req, res) {
+
+  console.log(req.sessionID);
+  console.log(req.session);
+  console.log(req.signedCookies);
+  console.log(req.signedCookies[process.env.SESSION_NAME]);
+
+
+  // first check if session store has the key
+  // const sid = req.signedCookies[process.env.SESSION_NAME]
+
+  // verify has session id in request
+  // if (!sid) {
+  //   res.status(401).json('No active session id.');
+  //   return null;
+  // }
+
+  // verify has this session id as key in redis store
+  // if (!redisClient.exists(sid)) {
+  //   res.status(401).json('No active session data.');
+  //   return null;
+  // }
+
+  // get the session from redis store 
   const session = req.session;
 
   if (!session.sfdcAuth) {
-    res.status(401).json('No active session.');
+    res.status(401).json('No active session sfdcAuth.');
     return null;
   }
 
@@ -75,16 +99,13 @@ router.get('/callback', (req, res) => {
       return;
     }
 
-    // Store oauth session data in server (never expose it directly to client)
+    // Store oauth session data in server/ session store 
+    // (never expose it directly to client)
     req.session.sfdcAuth = {
       instanceUrl: conn.instanceUrl,
       accessToken: conn.accessToken,
       refreshToken: conn.refreshToken
     };
-
-    console.log('in callback');
-
-    console.log(req);
 
     // Redirect to app main page
     //return res.redirect('/index.html');
@@ -92,10 +113,11 @@ router.get('/callback', (req, res) => {
 
     if (process.env.NODE_ENV === 'production') {
       return res.redirect('/user?valid=' + encodeStr);
+      //return res.redirect('/');
     } else if (process.env.NODE_ENV === 'development') {
-      return res.redirect('https://localhost:3000/user?valid=' + encodeStr);
+      return res.redirect('/');
     } else {
-      return res.redirect('https://localhost:3000/user?valid=' + encodeStr);
+      return res.redirect('/');
     }
   });
 });
@@ -145,6 +167,7 @@ router.get('/logout', async (req, res) => {
     });
 
     // Redirect to app main page
+    //TODO: can we use??? res.render('index.html');
     if (process.env.NODE_ENV === 'production') {
       return res.redirect('/index.html');
     } else if (process.env.NODE_ENV === 'development') {

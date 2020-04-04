@@ -88,4 +88,12 @@ router.get('/sfdata', async (req, res) => {
     console.log('session is working.');
 });
 
+//test redis session store 
+router.get('/redis', (req, res) => {
+    console.log('in redis test');
+
+    console.log(req.cookies);
+
+});
+
 module.exports = router;

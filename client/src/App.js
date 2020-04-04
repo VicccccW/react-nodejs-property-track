@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import About from "./components/About";
@@ -6,6 +6,11 @@ import PropertyMap from "./components/PropertyMap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
+
+  useEffect(() => {
+
+  });
+
   return (
     <div className="app-container">
       <Router>
