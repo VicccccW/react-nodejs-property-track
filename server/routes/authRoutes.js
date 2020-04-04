@@ -112,7 +112,7 @@ router.get('/callback', (req, res) => {
     const encodeStr = encodeURIComponent('true');
 
     if (process.env.NODE_ENV === 'production') {
-      return res.redirect('/user?valid=' + encodeStr);
+      return res.redirect('/');
       //return res.redirect('/');
     } else if (process.env.NODE_ENV === 'development') {
       return res.redirect('/');
