@@ -35,7 +35,7 @@ const sessionHandler = session({
     store:
         process.env.NODE_ENV === 'production'
             ? new RedisStore({
-                url: process.env.REDIS_URL
+                url: process.env.REDISCLOUD_URL
             })
             : new RedisStore({
                 host: 'localhost',
