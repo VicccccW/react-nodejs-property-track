@@ -25,8 +25,8 @@ function NavBar() {
                 <li>PropertyMap</li>
               </Link>
             ) : (
-                ""
-              )}
+              ""
+            )}
           </ul>
         </nav>
       </div>
@@ -41,17 +41,21 @@ function NavBar() {
           </div>
         </div>
       ) : (
-          <div className="slds-col slds-size_4-of-12">
-            <div className="slds-grid">
-              <div className="slds-col slds-size_8-of-12">
+        <div className="slds-col slds-size_4-of-12 slds-clearfix">
+          <div className="slds-grid">
+            <div className="slds-col slds-size_8-of-12 slds-clearfix">
+              <div className="userLoggedIn">
                 <User />
               </div>
-              <div className="slds-col slds-size_4-of-12">
+            </div>
+            <div className="slds-col slds-size_4-of-12 slds-clearfix">
+              <div className="slds-float_right slds-m-right_medium">
                 <LoginPanel />
               </div>
             </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

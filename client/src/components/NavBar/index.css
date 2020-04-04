@@ -13,3 +13,7 @@ nav {
   align-items: center;
   list-style: none;
 }
+
+.userLoggedIn {
+  display: flex;
+}

@@ -1,6 +1,5 @@
 const express = require('express');
 const session = require('express-session');
-//const redis = require('redis')
 const RedisStore = require('connect-redis')(session);
 const redisClient = require('./server/redisClient');
 const cookieParser = require('cookie-parser')
@@ -22,9 +21,6 @@ if (process.env.NODE_ENV === 'production') {
 // //setup port constants
 const port = process.env.PORT || 9000;
 
-//configure redis client on port 6379
-//const redisClient = redis.createClient();
-//const redisClient = redis.createClient('6379', 'localhost');
 redisClient.on('connect', () => console.log('Redis client connected'));
 redisClient.on('error', () => console.log('Something went wrong ' + err));
 
@@ -45,9 +41,11 @@ const sessionHandler = session({
     saveUninitialized: false
 });
 
+//in order to use cookie in Heroku, we need to set proxy
+app.set('trust proxy', 1);
+
 //use sessionMiddlware (app.use) before using session.
 //the express session uses cookies, so the cookie object needs to be present before it can use the session.
-app.set('trust proxy', 1);
 app.use(sessionHandler);
 
 //define route

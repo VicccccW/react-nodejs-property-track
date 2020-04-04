@@ -21,33 +21,11 @@ const oauth2 = new jsforce.OAuth2({
  *  If there is no session, redirects with HTTP 401 and an error message
  */
 function getSession(req, res) {
-
-  console.log(req.sessionID);
-  console.log(req.session);
-  console.log(req.signedCookies);
-  console.log(req.signedCookies[process.env.SESSION_NAME]);
-
-
-  // first check if session store has the key
-  // const sid = req.signedCookies[process.env.SESSION_NAME]
-
-  // verify has session id in request
-  // if (!sid) {
-  //   res.status(401).json('No active session id.');
-  //   return null;
-  // }
-
-  // verify has this session id as key in redis store
-  // if (!redisClient.exists(sid)) {
-  //   res.status(401).json('No active session data.');
-  //   return null;
-  // }
-
   // get the session from redis store 
   const session = req.session;
 
   if (!session.sfdcAuth) {
-    res.status(401).json('No active session sfdcAuth.');
+    res.status(401).json('No active session.');
     return null;
   }
 
@@ -169,11 +147,11 @@ router.get('/logout', async (req, res) => {
     // Redirect to app main page
     //TODO: can we use??? res.render('index.html');
     if (process.env.NODE_ENV === 'production') {
-      return res.redirect('/index.html');
+      return res.json('Success');
     } else if (process.env.NODE_ENV === 'development') {
-      return res.redirect('https://localhost:3000');
+      return res.json('Success');
     } else {
-      return res.redirect('https://localhost:3000');
+      return res.json('Success');
     }
   });
 });

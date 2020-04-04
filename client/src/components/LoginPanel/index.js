@@ -5,18 +5,33 @@ import Button from "@salesforce/design-system-react/components/button";
 import "./index.css";
 
 function LoginPanel() {
+
   const dispatch = useDispatch();
 
   let isLoggedIn = useSelector(state => state.auth.loggedIn);
+
+  async function fetchLogout() {
+    const res = await fetch('/api/auth/logout');
+
+    if (res.ok) {
+      const resInfo = await res.json();
+      return resInfo;
+    } else {
+      return;
+    }
+  }
 
   const loginHandler = () => {
     window.location = "/api/auth/login";
   };
 
   const logoutHandler = () => {
-    window.location = "/";
-    dispatch(logoutRequestSuccess());
-    fetch("/api/auth/logout");
+    console.log('in dispatch logoutRequestSuccess');
+    fetchLogout()
+      .then(res => {
+        dispatch(logoutRequestSuccess());
+      })
+      .catch(err => console.log(err));
   };
 
   return (

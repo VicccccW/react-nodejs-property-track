@@ -7,6 +7,12 @@ export const loginRequest = () => {
   }
 }
 
+export const loginNoAuthData = () => {
+  return {
+    type: types.AUTH_NO_AUTH_INFO
+  }
+}
+
 export const loginRequestSuccess = user => {
   return {
     type: types.AUTH_LOGIN_SUCCESS,

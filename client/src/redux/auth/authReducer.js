@@ -17,6 +17,14 @@ const authReducer = (state = initialState, action) => {
         user: {},
         error: ''
       };
+    case types.AUTH_NO_AUTH_INFO:
+      return {
+        ...state,
+        loading: false,
+        loggedIn: false,
+        user: {},
+        error: ''
+      };
     case types.AUTH_LOGIN_SUCCESS:
       return {
         ...state,
