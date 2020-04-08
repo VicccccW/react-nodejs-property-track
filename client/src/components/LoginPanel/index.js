@@ -6,15 +6,14 @@ import Button from "@salesforce/design-system-react/components/button";
 import "./index.css";
 
 function LoginPanel() {
-
   const dispatch = useDispatch();
 
-  let isLoggedIn = useSelector(state => state.auth.loggedIn);
+  let isLoggedIn = useSelector((state) => state.auth.loggedIn);
 
   const history = useHistory();
 
   async function fetchLogout() {
-    const res = await fetch('/api/auth/logout');
+    const res = await fetch("/api/auth/logout");
 
     if (res.ok) {
       const resInfo = await res.json();
@@ -29,13 +28,13 @@ function LoginPanel() {
   };
 
   const logoutHandler = () => {
-    console.log('in dispatch logoutRequestSuccess');
+    console.log("in dispatch logoutRequestSuccess");
     fetchLogout()
-      .then(res => {
+      .then((res) => {
         dispatch(logoutRequestSuccess());
         history.push("/");
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -43,21 +42,21 @@ function LoginPanel() {
       {isLoggedIn ? (
         <Button label="Logout" variant="destructive" onClick={logoutHandler} />
       ) : (
-          <div className="slds-align--absolute-center">
-            <button
-              className="slds-button slds-button--brand"
-              onClick={loginHandler}
+        <div className="slds-align--absolute-center">
+          <button
+            className="slds-button slds-button--brand"
+            onClick={loginHandler}
+          >
+            <svg
+              aria-hidden="true"
+              className="slds-button__icon--stateful slds-button__icon--left"
             >
-              <svg
-                aria-hidden="true"
-                className="slds-button__icon--stateful slds-button__icon--left"
-              >
-                <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
-              </svg>
+              <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
+            </svg>
             Log in
           </button>
-          </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

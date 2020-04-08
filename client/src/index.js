@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
 import "./index.css";
 import IconSettings from "@salesforce/design-system-react/components/icon-settings";
+import BrandBand from "@salesforce/design-system-react/module/components/brand-band";
 
 // Importing in our persistor from our redux store.
 // Remember persistor is the persisted version of our store.
@@ -29,7 +30,13 @@ ReactDOM.render(
           the state every time our app refreshes.
       */}
       <IconSettings iconPath="../public/assets/icons">
-        <App />
+        <BrandBand
+          className="slds-p-around_small"
+          theme="lightning-blue"
+          size="small"
+        >
+          <App />
+        </BrandBand>
       </IconSettings>
     </PersistGate>
   </Provider>,

@@ -30,6 +30,7 @@ function NavBar() {
           </ul>
         </nav>
       </div>
+      
       {isLogInLoading ? (
         <div className="slds-col slds-size_4-of-12">
           <div style={{ position: "relative" }}>

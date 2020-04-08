@@ -49,12 +49,10 @@ function App() {
       <Router>
         <NavBar />
         <Switch>
+          <Route path="/" exact component={About} />
           <Route path="/propertyMap" component={PropertyMap} />
         </Switch>
       </Router>
-      <div>
-        <About />
-      </div>
     </div>
   );
 }
