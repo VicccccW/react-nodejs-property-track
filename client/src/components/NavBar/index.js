@@ -1,62 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginPanel from "../LoginPanel";
-import User from "../User";
-import Spinner from "@salesforce/design-system-react/components/spinner";
+import GlobalNavigationBar from "@salesforce/design-system-react/components/global-navigation-bar";
+import GlobalNavigationBarRegion from "@salesforce/design-system-react/components/global-navigation-bar/region";
+import GlobalNavigationBarLink from "@salesforce/design-system-react/components/global-navigation-bar/link";
 import "./index.css";
 
 function NavBar() {
-  const navStyle = {
-    color: "white"
-  };
-
-  let isLogInLoading = useSelector(state => state.auth.loading);
-
-  let isLoggedIn = useSelector(state => state.auth.loggedIn);
+  let isLoggedIn = useSelector((state) => state.auth.loggedIn);
 
   return (
-    <div className="slds-grid slds-m-vertical_large">
-      <div className="slds-col slds-size_8-of-12">
-        <nav>
-          <ul className="nav-links">
-            {isLoggedIn ? (
-              <Link to="/propertyMap" style={navStyle}>
-                <li>PropertyMap</li>
-              </Link>
-            ) : (
-              ""
-            )}
-          </ul>
-        </nav>
+    <div className="slds-grid slds-m-vertical_large nav-wrapper slds-align_absolute-center">
+      <div className="slds-col slds-size_11-of-12">
+        {isLoggedIn ? (
+          <GlobalNavigationBar>
+            <GlobalNavigationBarRegion region="secondary" navigation>
+              <GlobalNavigationBarLink label="Home" href="/" />
+              <GlobalNavigationBarLink
+                label="Property Map"
+                href="/propertyMap"
+              />
+              <GlobalNavigationBarLink label="Heroku Postgres Data" href="/" />
+            </GlobalNavigationBarRegion>
+          </GlobalNavigationBar>
+        ) : (
+          ""
+        )}
       </div>
-      
-      {isLogInLoading ? (
-        <div className="slds-col slds-size_4-of-12">
-          <div style={{ position: "relative" }}>
-            <Spinner
-              size="small"
-              variant="base"
-              assistiveText={{ label: "Main Frame Loading..." }}
-            />
-          </div>
-        </div>
-      ) : (
-        <div className="slds-col slds-size_4-of-12 slds-clearfix">
-          <div className="slds-grid">
-            <div className="slds-col slds-size_8-of-12 slds-clearfix">
-              <div className="userLoggedIn">
-                <User />
-              </div>
-            </div>
-            <div className="slds-col slds-size_4-of-12 slds-clearfix">
-              <div className="slds-float_right slds-m-right_medium">
-                <LoginPanel />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="slds-col slds-size_1-of-12">
+        <LoginPanel />
+      </div>
     </div>
   );
 }

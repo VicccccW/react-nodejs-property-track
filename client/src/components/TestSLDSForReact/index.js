@@ -1,8 +1,7 @@
-import React from 'react';
-import Button from '@salesforce/design-system-react/components/button';
+import React from "react";
+import Button from "@salesforce/design-system-react/components/button";
 
 function TestSLDSForReact() {
-
   const intro = `TestSLDSForReact PlaceHolder.`;
 
   return (
@@ -14,10 +13,7 @@ function TestSLDSForReact() {
         <Button label="Destructive" variant="destructive" />
 
         <Button label="Outline Brand" variant="outline-brand" />
-
-
       </div>
-
     </div>
   );
 }

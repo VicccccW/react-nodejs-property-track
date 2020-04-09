@@ -17,7 +17,7 @@ import { store, persistor } from "./redux/store";
 // Specific for react. There are other versions for differen libs like electron or react-native.
 import { PersistGate } from "redux-persist/integration/react";
 
-import App from "./App";
+import App from "./components/App/App.js";
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import NavBar from "./components/NavBar";
-import About from "./components/About";
-import PropertyMap from "./components/PropertyMap";
+import NavBar from "../NavBar";
+import About from "../About";
+import PropertyMap from "../PropertyMap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { loginRequest, loginRequestSuccess, loginNoAuthData } from "../src/redux/auth/authActions"
+import { loginRequest, loginRequestSuccess, loginNoAuthData } from "../../redux/auth/authActions"
 
 function App() {
 

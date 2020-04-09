@@ -8,7 +8,12 @@ function PostgresDB() {
 
   return (
     <div>
-      <p>{intro}</p>
+      
+      <div className="slds-box slds-theme_shade slds-theme_alert-texture slds-box_small slds-text-font_monospace map-container">
+        <div className="slds-box map-content-container">
+        <p>{intro}</p>
+        </div>
+      </div>
     </div>
   );
 }

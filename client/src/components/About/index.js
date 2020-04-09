@@ -12,10 +12,8 @@ function About() {
 
   const keywords = `react, express, Salesforce, Heroku, OAuth2, CICD`;
 
-  const build_with = ``;
-
   return (
-    <div className="slds-box slds-box_small about-container slds-text-font_monospace">
+    <div className="slds-box slds-theme_shade slds-theme_alert-texture slds-box_small about-container slds-text-font_monospace">
       <div className="slds-box slds-m-vertical_small about-content-container">
         <div className="slds-text-title_bold slds-text-title_caps slds-p-vertical_x-small">
           {title}
@@ -34,7 +32,7 @@ function About() {
           Build With
         </div>
         <div className="slds-grid slds-gutters">
-          <div class="slds-col slds-size_1-of-4">
+          <div className="slds-col slds-size_1-of-4">
             <div className="slds-box">
               <div className="slds-text-title_bold slds-p-vertical_x-small">
                 react

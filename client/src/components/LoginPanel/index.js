@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRequestSuccess } from "../../redux/auth/authActions";
+import User from "../User";
 import Button from "@salesforce/design-system-react/components/button";
 import "./index.css";
 
@@ -37,12 +38,54 @@ function LoginPanel() {
       .catch((err) => console.log(err));
   };
 
+  const [collapse, setCollapse] = useState(false);
+
+  const collapseHandler = () => {
+    setCollapse(() => !collapse);
+  };
+
   return (
     <div>
       {isLoggedIn ? (
-        <Button label="Logout" variant="destructive" onClick={logoutHandler} />
+        <div className="slds-col slds-size_1-of-12 slds-align_absolute-center">
+          <div
+            className={`slds-dropdown-trigger slds-dropdown-trigger_click ${
+              collapse ? "slds-is-open" : ""
+            }`
+          }
+          onMouseEnter={collapseHandler}
+          onMouseLeave={collapseHandler}
+          >
+            <span className="slds-avatar slds-avatar_circle slds-avatar_large">
+              <img
+                alt="Profile"
+                src="/assets/images/product1.jpg"
+              />
+            </span>
+
+            <div className="slds-dropdown slds-dropdown_right">
+              <ul
+                className="slds-dropdown__list slds-m-around_small"
+                role="menu"
+              >
+                <li className="slds-dropdown__item" role="presentation">
+                  <div className="slds-m-around_medium">
+                    <User />
+                  </div>
+                </li>
+                <li className="slds-dropdown__item" role="presentation">
+                  <Button
+                    label="Logout"
+                    variant="destructive"
+                    onClick={logoutHandler}
+                  />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       ) : (
-        <div className="slds-align--absolute-center">
+        <div>
           <button
             className="slds-button slds-button--brand"
             onClick={loginHandler}
@@ -51,7 +94,7 @@ function LoginPanel() {
               aria-hidden="true"
               className="slds-button__icon--stateful slds-button__icon--left"
             >
-              <use xlinkHref="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
+              <use href="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
             </svg>
             Log in
           </button>
