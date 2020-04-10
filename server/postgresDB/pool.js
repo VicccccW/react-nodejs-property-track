@@ -4,12 +4,13 @@ const createDBConfig = () => {
   if (process.env.NODE_ENV === 'production') {
     return {
       connectionString: process.env.DATABASE_URL,
-      ssl: true
+      ssl: {
+        rejectUnauthorized: false
+      }
     };
   } else {
     return {
-      connectionString: process.env.DATABASE_URL,
-      ssl: false
+      connectionString: process.env.DATABASE_URL
     };
   }
 }
