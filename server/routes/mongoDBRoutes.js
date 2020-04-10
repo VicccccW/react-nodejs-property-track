@@ -4,7 +4,7 @@ const Property = require('../models/propertyModel');
 
 //if touch this point, we mean Salesforce has prepared data structure (json format) 
 //and wants to back up these data in MongoDB
-router.post('/', async (req, res) => {
+router.post('/backup', async (req, res) => {
     console.log("request in backup put ");
 
     try {
@@ -31,7 +31,18 @@ router.post('/', async (req, res) => {
     }
 });
 
-function convertData(requestBody) {
+//get all Properties 
+router.get('/import', async (req, res) => {
+    try {
+        //find() is a method of mongoose, if no parameter, return all
+        const properties = await Property.find();
+        res.json(properties);
+    } catch (err) {
+        res.json({ message: err });
+    }
+});
+
+const convertData = requestBody => {
     if (requestBody.properties == null || requestBody.properties.length == 0) {
         return null;
     }
@@ -47,7 +58,7 @@ function convertData(requestBody) {
 }
 
 //function to return an object with Mongoose UpdateOne structure
-function buildUpsertOneStructure(property) {
+const buildUpsertOneStructure = property => {
     const structure = {
         updateOne: {
             filter: {},

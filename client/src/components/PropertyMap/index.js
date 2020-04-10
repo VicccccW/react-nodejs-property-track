@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./index.css";
 
 function PropertyMap() {
   useEffect(() => {
@@ -43,8 +42,8 @@ function PropertyMap() {
 
   return (
     <div>
-      <div className="slds-box slds-theme_shade slds-theme_alert-texture slds-box_small slds-text-font_monospace map-container">
-        <div className="slds-box map-content-container">
+      <div className="slds-box slds-theme_shade slds-theme_alert-texture slds-box_small slds-text-font_monospace cmp-body-title-wrapper">
+        <div className="slds-box cmp-body-title-container">
           <p>
             Below is a LWC using lightning out technique and expose to this
             react component.

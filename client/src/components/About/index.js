@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 
 function About() {
   const title = `React-SFDX Integration`;
@@ -13,21 +12,21 @@ function About() {
   const keywords = `react, express, Salesforce, Heroku, OAuth2, CICD`;
 
   return (
-    <div className="slds-box slds-theme_shade slds-theme_alert-texture slds-box_small about-container slds-text-font_monospace">
-      <div className="slds-box slds-m-vertical_small about-content-container">
+    <div className="slds-box slds-theme_shade slds-theme_alert-texture slds-box_small cmp-body-title-wrapper slds-text-font_monospace">
+      <div className="slds-box slds-m-vertical_small cmp-body-title-container">
         <div className="slds-text-title_bold slds-text-title_caps slds-p-vertical_x-small">
           {title}
         </div>
       </div>
 
-      <div className="slds-box slds-m-vertical_small about-content-container">
+      <div className="slds-box slds-m-vertical_small cmp-body-title-container">
         <div className="slds-text-title_bold slds-text-title_caps slds-p-vertical_x-small">
           Keywords
         </div>
         <div>{keywords}</div>
       </div>
 
-      <div className="slds-box slds-m-vertical_small about-content-container">
+      <div className="slds-box slds-m-vertical_small cmp-body-title-container">
         <div className="slds-text-title_bold slds-text-title_caps slds-p-vertical_x-small">
           Build With
         </div>
@@ -52,8 +51,10 @@ function About() {
                 express
               </div>
               <ul>
+                <li>jsforce</li>
                 <li>Redis</li>
                 <li>Mongoose</li>
+                <li>Postgresql</li>
                 <li>Server Proxy</li>
               </ul>
             </div>
@@ -81,13 +82,27 @@ function About() {
                 <li>Pipeline</li>
                 <li>Heroku Redis</li>
                 <li>Heroku Connect</li>
+                <li>Heroku Postgres</li>
+                <li>The Twelve-Factor App</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="slds-box slds-m-vertical_small about-content-container">
+      <div className="slds-box slds-m-vertical_small cmp-body-title-container">
+        <div className="slds-text-title_bold slds-text-title_caps slds-p-vertical_x-small">
+          Codebase
+        </div>
+        <div>React App Github:
+          <a href="https://github.com/uniquewq91/react-nodejs-property-track" target="_blank"> https://github.com/uniquewq91/react-nodejs-property-track</a>
+        </div>
+        <div>SFDX App Github:
+          <a href="https://github.com/uniquewq91/sfdx-property-track" target="_blank"> https://github.com/uniquewq91/sfdx-property-track</a>
+        </div>
+      </div>
+
+      <div className="slds-box slds-m-vertical_small cmp-body-title-container">
         <div className="slds-text-title_bold slds-text-title_caps slds-p-vertical_x-small">
           Author
         </div>

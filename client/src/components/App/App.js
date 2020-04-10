@@ -3,6 +3,7 @@ import "./App.css";
 import NavBar from "../NavBar";
 import About from "../About";
 import PropertyMap from "../PropertyMap";
+import PostgresDB from "../PostgresDB";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginRequest, loginRequestSuccess, loginNoAuthData } from "../../redux/auth/authActions"
@@ -51,6 +52,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={About} />
           <Route path="/propertyMap" component={PropertyMap} />
+          <Route path="/postgresDB" component={PostgresDB} />
         </Switch>
       </Router>
     </div>

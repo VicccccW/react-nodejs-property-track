@@ -17,7 +17,7 @@ const oauth2 = new jsforce.OAuth2({
  *  Attemps to retrieves the server session.
  *  If there is no session, redirects with HTTP 401 and an error message
  */
-function getSession(req, res) {
+const getSession = (req, res) => {
   // get the session from redis store 
   const session = req.session;
 
@@ -29,7 +29,7 @@ function getSession(req, res) {
   return session;
 }
 
-function resumeSalesforceConnection(session) {
+const resumeSalesforceConnection = session => {
   return new jsforce.Connection({
     oauth2: oauth2,
     instanceUrl: session.sfdcAuth.instanceUrl,
@@ -39,7 +39,7 @@ function resumeSalesforceConnection(session) {
 }
 
 //use REGEX extract the lightning domain url, which is different from instance url
-function getLightningDomainUrl(instanceUrl) {
+const getLightningDomainUrl = instanceUrl => {
   const pattern = /(https:\/\/[^.]+)/;
   return `${instanceUrl.match(pattern)[0]}.lightning.force.com`;
 }
@@ -67,7 +67,7 @@ router.get('/callback', (req, res) => {
     version: process.env.SF_API_VERSION
   });
 
-  conn.authorize(req.query.code, function (error, userInfo) {
+  conn.authorize(req.query.code, (error, userInfo) => {
     if (error) {
       console.log('Salesforce authorization error: ' + JSON.stringify(error));
       res.status(500).json(error);
@@ -119,7 +119,7 @@ router.get('/logout', async (req, res) => {
   // Revoke OAuth token
   const conn = resumeSalesforceConnection(session);
 
-  conn.logout(function (err) {
+  conn.logout(err => {
     if (err) {
       console.error('Salesforce OAuth revoke error: ' + JSON.stringify(err));
       response.status(500).json(err);
@@ -127,7 +127,7 @@ router.get('/logout', async (req, res) => {
     }
 
     // Destroy server-side session
-    session.destroy((err) => {
+    session.destroy(err => {
       if (err) {
         console.error('Salesforce session destruction error: ' + JSON.stringify(err));
       }

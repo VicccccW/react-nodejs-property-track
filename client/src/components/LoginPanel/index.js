@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutRequestSuccess } from "../../redux/auth/authActions";
 import User from "../User";
 import Button from "@salesforce/design-system-react/components/button";
-import "./index.css";
 
 function LoginPanel() {
   const dispatch = useDispatch();
@@ -51,10 +50,10 @@ function LoginPanel() {
           <div
             className={`slds-dropdown-trigger slds-dropdown-trigger_click ${
               collapse ? "slds-is-open" : ""
-            }`
-          }
-          onMouseEnter={collapseHandler}
-          onMouseLeave={collapseHandler}
+              }`
+            }
+            onMouseEnter={collapseHandler}
+            onMouseLeave={collapseHandler}
           >
             <span className="slds-avatar slds-avatar_circle slds-avatar_large">
               <img
@@ -85,21 +84,21 @@ function LoginPanel() {
           </div>
         </div>
       ) : (
-        <div>
-          <button
-            className="slds-button slds-button--brand"
-            onClick={loginHandler}
-          >
-            <svg
-              aria-hidden="true"
-              className="slds-button__icon--stateful slds-button__icon--left"
+          <div>
+            <button
+              className="slds-button slds-button--brand"
+              onClick={loginHandler}
             >
-              <use href="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
-            </svg>
+              <svg
+                aria-hidden="true"
+                className="slds-button__icon--stateful slds-button__icon--left"
+              >
+                <use href="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
+              </svg>
             Log in
           </button>
-        </div>
-      )}
+          </div>
+        )}
     </div>
   );
 }

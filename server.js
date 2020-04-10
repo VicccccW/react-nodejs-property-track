@@ -1,15 +1,16 @@
 const express = require('express');
 const session = require('express-session');
+require('dotenv').config();
 const RedisStore = require('connect-redis')(session);
 const redisClient = require('./server/redisClient');
+const mongoose = require('mongoose');
+const postgresqlPool = require('./server/postgresDB/pool');
 const cookieParser = require('cookie-parser')
 const path = require('path');
-const mongoose = require('mongoose');
-const cors = require('cors'); //Providing a Connect/Express middleware that can be used to enable CORS
+const cors = require('cors'); //providing a Connect/Express middleware that can be used to enable CORS
 const app = express();
-const fs = require('fs')
-const https = require('https');
-require('dotenv').config();
+const fs = require('fs'); //use in https dev mode
+const https = require('https'); //use in https dev mode
 
 //production mode
 if (process.env.NODE_ENV === 'production') {
@@ -18,11 +19,29 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/', express.static(path.join(__dirname, '/client/public')));
 }
 
-// //setup port constants
+//setup port
 const port = process.env.PORT || 9000;
 
-redisClient.on('connect', () => console.log('Redis client connected'));
-redisClient.on('error', () => console.log('Something went wrong ' + err));
+redisClient.on('connect', () => console.log('Connecting to Redis...'));
+//if receive err, make sure you have your redis server running locally
+redisClient.on('error', err => console.log('Redis Connecton Error ' + err));
+
+//connet to postgresql
+postgresqlPool.on('connect', client => {
+    console.log('Connecting to postgresql...');
+});
+
+postgresqlPool.on('error', (err, client) => {
+    console.error('Unexpected error on idle client', err);
+    process.exit(-1);
+});
+
+//connect to mongoDB
+mongoose.connect(
+    process.env.MONGODB_URI,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    () => console.log('Connecting to mongoDB...')
+);
 
 app.use(cors());
 app.use(cookieParser());
@@ -36,7 +55,7 @@ const sessionHandler = session({
     store: new RedisStore({ client: redisClient }),
     name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET_KEY,
-    cookie: { secure: process.env.ISHTTPS === 'true', maxAge: 60 * 60 * 1000 },
+    cookie: { secure: process.env.ISHTTPS === 'true', maxAge: 60 * 30 * 1000 },
     resave: false,
     saveUninitialized: false
 });
@@ -52,18 +71,14 @@ app.use(sessionHandler);
 const apiRoutes = require('./server/routes/apiRoutes');
 app.use('/api', sessionHandler, apiRoutes);
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
+//the "catchall" handler: for any request that doesn't
+//match api router above, send back React's index.html file.
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-//connect to DB
-mongoose.connect(
-    process.env.MONGODB_URI,
-    { useUnifiedTopology: true, useNewUrlParser: true },
-    () => console.log('Connecting to db')
-);
+
+
 
 // //for https dev mode
 // https.createServer({

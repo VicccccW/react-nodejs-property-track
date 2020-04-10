@@ -2,10 +2,10 @@
   text-align: center;
 }
 
-.component-body-container {
+.cmp-body-title-wrapper {
   background-color: #dddbda;
 }
 
-.component-body-content-container {
+.cmp-body-title-container {
   background-color: #eeeeee;
 }

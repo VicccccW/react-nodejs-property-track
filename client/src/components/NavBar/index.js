@@ -20,12 +20,12 @@ function NavBar() {
                 label="Property Map"
                 href="/propertyMap"
               />
-              <GlobalNavigationBarLink label="Heroku Postgres Data" href="/" />
+              <GlobalNavigationBarLink label="Heroku Postgres Data" href="/postgresDB" />
             </GlobalNavigationBarRegion>
           </GlobalNavigationBar>
         ) : (
-          ""
-        )}
+            ""
+          )}
       </div>
       <div className="slds-col slds-size_1-of-12">
         <LoginPanel />
