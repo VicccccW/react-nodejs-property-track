@@ -9,3 +9,7 @@
 .cmp-body-title-container {
   background-color: #eeeeee;
 }
+
+.display-linebreak {
+  white-space: pre-line;
+}

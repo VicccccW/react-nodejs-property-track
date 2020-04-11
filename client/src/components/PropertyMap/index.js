@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import NoAuth from "../NoAuth";
 
 function PropertyMap() {
+  let isLoggedIn = useSelector((state) => state.auth.loggedIn);
+
   useEffect(() => {
     async function renderLWC() {
       const baseScriptElement = document.createElement("script");
@@ -42,15 +46,21 @@ function PropertyMap() {
 
   return (
     <div>
-      <div className="slds-box slds-theme_shade slds-theme_alert-texture slds-box_small slds-text-font_monospace cmp-body-title-wrapper">
-        <div className="slds-box cmp-body-title-container">
-          <p>
-            Below is a LWC using lightning out technique and expose to this
-            react component.
-          </p>
+      {isLoggedIn ? (
+        <div>
+          <div className="slds-box slds-theme_shade slds-theme_alert-texture slds-box_small slds-text-font_monospace cmp-body-title-wrapper">
+            <div className="slds-box cmp-body-title-container">
+              <p>
+                Below is a LWC using lightning out technique and expose to this
+                react component.
+              </p>
+            </div>
+          </div>
+          <div id="propertyMap"></div>
         </div>
-      </div>
-      <div id="propertyMap"></div>
+      ) : (
+        <NoAuth />
+      )}
     </div>
   );
 }
