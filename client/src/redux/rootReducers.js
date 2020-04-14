@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import testReducer from "./test/testReducer";
 import authReducer from "./auth/authReducer";
-import propertyDataReducer from "./property/propertyReducer";
+import propertyReducer from "./property/propertyReducer";
 
 // Persists our reducer
 import { persistReducer } from 'redux-persist';
@@ -31,7 +31,7 @@ const persistConfig = {
 const rootReducers = combineReducers({
   test: testReducer,
   auth: authReducer,
-  propertyData: propertyDataReducer
+  property: propertyReducer
 });
 
 export default persistReducer(persistConfig, rootReducers); 
