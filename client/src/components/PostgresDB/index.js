@@ -3,13 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import NoAuth from "../NoAuth";
 import DataTable from "@salesforce/design-system-react/components/data-table";
 import DataTableColumn from "@salesforce/design-system-react/components/data-table/column";
-import DataTableCell from "@salesforce/design-system-react/components/data-table/cell";
-import {
-  propertyFetchRequest,
-  propertyFetchSuccess,
-  propertyFetchFailure,
-} from "../../redux/property/propertyActions";
-import { types } from "pg";
+import DataTableCell from '@salesforce/design-system-react/components/data-table/cell';
+import Checkbox from '@salesforce/design-system-react/components/checkbox';
+import { propertyFetchRequest, propertyFetchSuccess, propertyFetchFailure } from "../../redux/property/propertyActions";
 
 const intro = `
 This component will render one or more tables from Postgresql Database. 
@@ -31,6 +27,52 @@ async function fetchProperties() {
   }
 }
 
+const ClickableDataTableCell = ({ children, ...props }) => (
+  <DataTableCell {...props}>
+    {/* <a
+      href="javascript:void(0);"
+      onClick={(event) => {
+        event.preventDefault();
+        console.log(props);
+      }}
+    >
+      {children}
+    </a> */}
+
+    <a
+      href="javascript:void(0);"
+      onClick={(event) => {
+        event.preventDefault();
+      }}
+    >
+      {children}
+    </a>
+  </DataTableCell>
+);
+
+ClickableDataTableCell.displayName = DataTableCell.displayName;
+
+const CheckboxDataTableCell = ({ children, ...props }) => {
+
+  //we previously convert the json data into string
+  //so here boolen check won't work, need to check string valye
+  if (props.item.has_sold__c === 'true') {
+    return (
+      <DataTableCell {...props}>
+        <Checkbox disabled checked />
+      </DataTableCell>
+    );
+  } else {
+    return (
+      <DataTableCell {...props}>
+        <Checkbox disabled />
+      </DataTableCell>
+    );
+  }
+};
+
+CheckboxDataTableCell.displayName = DataTableCell.displayName;
+
 const columns = [
   <DataTableColumn key="property-name" label="Property Name" property="name__c" />,
 
@@ -42,9 +84,13 @@ const columns = [
 
   <DataTableColumn key="land-size" label="Land Size" property="land_size__c" />,
 
-  // <DataTableColumn key="has-sold" label="Has Sold" property="has_sold__c" />,
+  <DataTableColumn key="has-sold" label="Has Sold" property="has_sold__c">
+    <CheckboxDataTableCell />
+  </DataTableColumn>,
 
-  <DataTableColumn key="name" label="SF Name" property="name" />,
+  <DataTableColumn key="name" label="SF Name" property="name" >
+    <ClickableDataTableCell />
+  </DataTableColumn>,
 ];
 
 const PropertyTable = ({ properties, error }) => {
@@ -58,7 +104,7 @@ const PropertyTable = ({ properties, error }) => {
     );
   } else {
     return (
-      <DataTable items={properties} id="all-properties" striped>
+      <DataTable items={properties} id="all-properties">
         {columns}
       </DataTable>
     );
@@ -68,6 +114,8 @@ const PropertyTable = ({ properties, error }) => {
 const replacer = (key, value) => {
   if (value && typeof value === 'object') {
     return value;
+  } else if (value === null) {
+    return '';
   } else {
     return '' + value;
   }
@@ -84,7 +132,9 @@ const parseProperties = properties => {
   return JSON.parse(JSON.stringify(properties, replacer));
 }
 
-
+/**
+ * component main entry point
+ */
 const PostgresDB = () => {
   const dispatch = useDispatch();
 
