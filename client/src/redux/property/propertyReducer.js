@@ -3,7 +3,7 @@ import * as types from "./propertyTypes";
 const initialState = {
   fetching: false,
   items: [],
-  error: "",
+  error: ""
 };
 
 const propertyDataReducer = (state = initialState, action) => {
@@ -13,21 +13,21 @@ const propertyDataReducer = (state = initialState, action) => {
         ...state,
         fetching: true,
         items: [],
-        error: "",
+        error: ""
       };
     case types.PROPERTY_FETCH_SUCCESS:
       return {
         ...state,
         fetching: false,
         items: action.payload,
-        error: "",
+        error: ""
       };
     case types.PROPERTY_FETCH_FAILURE:
       return {
         ...state,
         fetching: false,
         items: [],
-        error: action.payload,
+        error: action.payload
       };
     default:
       return state;
