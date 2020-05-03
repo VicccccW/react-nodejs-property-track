@@ -22,7 +22,7 @@ const getSession = (req, res) => {
   const session = req.session;
 
   if (!session.sfdcAuth) {
-    res.status(401).json('No active session.');
+    res.status(200).json({ NoAuth: true });
     return;
   }
 
@@ -83,8 +83,6 @@ router.get('/callback', (req, res) => {
     };
 
     // Redirect to app main page
-    const encodeStr = encodeURIComponent('true');
-
     return res.redirect('/');
   });
 });
@@ -95,10 +93,7 @@ router.get('/callback', (req, res) => {
 router.get('/whoami', (req, res) => {
   const session = getSession(req, res);
 
-  if (session == null) {
-    console.log('No active session.');
-    return;
-  }
+  if (!session) return;
 
   // Request session info from Salesforce
   const conn = resumeSalesforceConnection(session);
@@ -114,7 +109,8 @@ router.get('/whoami', (req, res) => {
 
 router.get('/logout', async (req, res) => {
   const session = getSession(req, res);
-  if (session == null) return;
+
+  if (!session) return;
 
   // Revoke OAuth token
   const conn = resumeSalesforceConnection(session);
@@ -140,7 +136,7 @@ router.get('/logout', async (req, res) => {
 router.get('/token', (req, res) => {
   const session = getSession(req, res);
 
-  if (session == null) {
+  if (!session) {
     console.log('No active session.');
     return;
   }
@@ -151,7 +147,7 @@ router.get('/token', (req, res) => {
 router.get('/propertyMapBaseScriptUrl', (req, res) => {
   const session = getSession(req, res);
 
-  if (session == null) {
+  if (!session) {
     console.log('No active session for Lightning Out Base Script URL.');
     return;
   }
@@ -163,7 +159,7 @@ router.get('/propertyMapBaseScriptUrl', (req, res) => {
 router.get('/propertyMapLtnOutJs', (req, res) => {
   const session = getSession(req, res);
 
-  if (session == null) {
+  if (!session) {
     console.log('No active session for Lightning Out JS.');
     return;
   }

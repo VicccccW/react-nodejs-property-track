@@ -1,49 +1,45 @@
-import React, { useEffect } from "react";
-import "./App.css";
-import NavBar from "../NavBar";
-import About from "../About";
-import PropertyMap from "../PropertyMap";
-import PostgresDB from "../PostgresDB";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { loginRequest, loginRequestSuccess, loginNoAuthData } from "../../redux/auth/authActions"
+import React, { useEffect } from 'react';
+import './App.css';
+import NavBar from '../NavBar';
+import About from '../About';
+import PropertyMap from '../PropertyMap';
+import PostgresDB from '../PostgresDB/';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useGlobalState } from '../../hooks/globalHook';
+import { fetchUserInfo, saveToLocalStorage } from '../../helper';
 
 function App() {
+  const { auth, authInSuccess, authExpire } = useGlobalState();
 
-  const dispatch = useDispatch();
-
-  let isLoggedIn = useSelector(state => state.auth.loggedIn);
-
-  async function fetchUser() {
-    const userRes = await fetch('/api/auth/whoami');
-
-    if (userRes.status === 200 || userRes.status === 304) {
-      const user = await userRes.json();
-      return user;
-    } else if (userRes.status === 401) {
-      return Promise.reject('Unauthorized');
-    } else {
-      return;
-    }
-  }
-
+  /**
+   * invoke only when app first render
+   * in auth callback scenario, localstorage lost
+   * so call the fetch
+   */
   useEffect(() => {
-    if (!isLoggedIn) {
-      dispatch(loginRequest());
-
-      fetchUser()
-        .then(user => {
-          if (user) {
-            dispatch(loginRequestSuccess(user));
+    if (!auth.user) {
+      fetchUserInfo()
+        .then((res) => {
+          if (res) {
+            authInSuccess(res);
           } else {
-            dispatch(loginNoAuthData());
+            authExpire();
           }
         })
-        .catch(err => {
-          dispatch(loginNoAuthData());
+        .catch((err) => {
+          authExpire();
+          console.log(err);
         });
     }
-  }, [isLoggedIn]);
+  }, []);
+
+  /**
+   * invoke every time the auth state changes
+   * e.g. login or logout
+   */
+  useEffect(() => {
+    saveToLocalStorage('auth', auth);
+  }, [auth]);
 
   return (
     <div className="app-container">
