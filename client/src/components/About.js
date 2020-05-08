@@ -2,7 +2,7 @@ import React from 'react';
 import SLDSGreyBoxWrap from './SLDSGreyBoxWrap';
 import SLDSGreyBox from './SLDSGreyBox';
 
-function About() {
+const About = () => {
   const aboutData = [
     {
       title: 'React-SFDX Integration',
@@ -17,7 +17,7 @@ function About() {
         {
           name: 'react',
           detail: [
-            'React Redux',
+            'SocketIO',
             'React Hooks',
             'React Router',
             'SLDS for React',
@@ -28,19 +28,19 @@ function About() {
           name: 'express',
           detail: [
             'jsforce',
+            'SocketIO',
             'Redis',
             'Mongoose',
-            'Postgresql',
-            'Server Proxy',
+            'Postgresql'
           ],
         },
         {
           name: 'Salesforce',
           detail: [
             'SFDX',
+            'Platform Event',
             'Design Pattern',
             'SFDC Best Practice',
-            'Lightning Out',
             'Lightning Web Component',
           ],
         },

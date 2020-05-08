@@ -1,4 +1,4 @@
-import { AUTH_LOGIN_SUCCESS, AUTH_UPDATE, AUTH_EXPIRE, AUTH_LOGOUT } from '../constant';
+import { AUTH_LOGIN_SUCCESS, AUTH_UPDATE, AUTH_EXPIRE, AUTH_LOGOUT, SF_EVENT_ADD_NEW, SF_EVENT_REMOVE_OLD } from '../constant';
 
 export const authReducer = (state, action) => {
   switch (action.type) {
@@ -30,3 +30,17 @@ export const authReducer = (state, action) => {
       return state;
   }
 };
+
+export const sfEventReducer = (state, action) => {
+  switch (action.type) {
+    case SF_EVENT_ADD_NEW:
+      return {
+        ...state,
+        ...action.payload
+      };
+    case SF_EVENT_REMOVE_OLD:
+      return null;
+    default:
+      return state;
+  }
+}
