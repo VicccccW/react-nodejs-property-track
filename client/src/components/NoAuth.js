@@ -1,7 +1,7 @@
 import React from "react";
 import SLDSGreyBox from './SLDSGreyBox';
 
-function NoAuth() {
+const NoAuth = () => {
   const message = `You are not logged in.`;
 
   return (

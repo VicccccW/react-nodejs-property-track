@@ -7,7 +7,7 @@ import React from 'react';
  * if the data contains a buildwith list
  * the buildwith list should follow data structure pattern: buildwithList:[{name: "xxx", detail: ["xxx","xxx"]}]
  */
-function BuildwithList({ buildwithList }) {
+const BuildwithList = ({ buildwithList }) => {
   if (!buildwithList) {
     return null;
   }
@@ -28,7 +28,7 @@ function BuildwithList({ buildwithList }) {
  * if the data contains a buildwith list
  * this is the cmp that loop each item in the list
  */
-function BuildwithItem({ name, detail }) {
+const BuildwithItem = ({ name, detail }) => {
   return (
     <div className="slds-col slds-size_1-of-4">
       <div className="slds-box slds-m-around_small">
@@ -52,7 +52,7 @@ function BuildwithItem({ name, detail }) {
  * if the data contains a urls list
  * the url list should follow data structure pattern: urls:[{urlName: "xxx", urlLink: "xxx"}]
  */
-function Urls({ urls }) {
+const Urls = ({ urls }) => {
   if (!urls) {
     return null;
   }
@@ -78,7 +78,7 @@ function Urls({ urls }) {
  *
  * this is the component main UI
  */
-function SLDSGreyBox({ title, detail, urls, buildwithList }) {
+const SLDSGreyBox = ({ title, detail, urls, buildwithList }) => {
   return (
     <div className="slds-box slds-m-vertical_small cmp-body-title-container">
       {title ? (
@@ -86,8 +86,8 @@ function SLDSGreyBox({ title, detail, urls, buildwithList }) {
           <div>{title}</div>
         </div>
       ) : (
-        <></>
-      )}
+          <></>
+        )}
       {detail ? <div className="display-linebreak">{detail}</div> : <></>}
       <BuildwithList buildwithList={buildwithList} />
       <Urls urls={urls} />

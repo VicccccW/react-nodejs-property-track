@@ -39,7 +39,8 @@
     "mongoose": "^5.9.3",
     "pg": "^8.0.2",
     "redis": "^3.0.2",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "socket.io": "^2.3.0"
   },
   "engines": {
     "node": "13.x"

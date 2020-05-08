@@ -4,12 +4,12 @@ import User from './User';
 import Button from '@salesforce/design-system-react/components/button';
 import { useGlobalState } from '../hooks/globalHook';
 
-function LoginPanel() {
-  const { auth, authOutSuccess } = useGlobalState();
-
+const LoginPanel = () => {
   const history = useHistory();
+  const { auth, authOutSuccess } = useGlobalState();
+  const [collapse, setCollapse] = useState(false);
 
-  async function fetchLogout() {
+  const fetchLogout = async () => {
     const res = await fetch('/api/auth/logout');
 
     if (res.ok) {
@@ -18,7 +18,7 @@ function LoginPanel() {
     } else {
       return;
     }
-  }
+  };
 
   const loginHandler = () => {
     window.location = '/api/auth/login';
@@ -33,8 +33,6 @@ function LoginPanel() {
       .catch((err) => console.log(err));
   };
 
-  const [collapse, setCollapse] = useState(false);
-
   const collapseHandler = () => {
     setCollapse(() => !collapse);
   };
@@ -46,7 +44,7 @@ function LoginPanel() {
           <div
             className={`slds-dropdown-trigger slds-dropdown-trigger_click ${
               collapse ? 'slds-is-open' : ''
-            }`}
+              }`}
             onMouseEnter={collapseHandler}
             onMouseLeave={collapseHandler}
           >
@@ -76,23 +74,23 @@ function LoginPanel() {
           </div>
         </div>
       ) : (
-        <div>
-          <button
-            className="slds-button slds-button--brand"
-            onClick={loginHandler}
-          >
-            <svg
-              aria-hidden="true"
-              className="slds-button__icon--stateful slds-button__icon--left"
+          <div>
+            <button
+              className="slds-button slds-button--brand"
+              onClick={loginHandler}
             >
-              <use href="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
-            </svg>
+              <svg
+                aria-hidden="true"
+                className="slds-button__icon--stateful slds-button__icon--left"
+              >
+                <use href="/assets/icons/utility-sprite/svg/symbols.svg#salesforce1"></use>
+              </svg>
             Log in
           </button>
-        </div>
-      )}
+          </div>
+        )}
     </div>
   );
-}
+};
 
 export default LoginPanel;

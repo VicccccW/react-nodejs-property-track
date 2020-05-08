@@ -5,7 +5,7 @@ import GlobalNavigationBarRegion from '@salesforce/design-system-react/component
 import GlobalNavigationBarLink from '@salesforce/design-system-react/components/global-navigation-bar/link';
 import { useGlobalState } from '../hooks/globalHook';
 
-function NavBar() {
+const NavBar = () => {
   const { auth } = useGlobalState();
   return (
     <div className="slds-grid slds-m-vertical_large nav-wrapper slds-align_absolute-center">
@@ -25,8 +25,8 @@ function NavBar() {
             </GlobalNavigationBarRegion>
           </GlobalNavigationBar>
         ) : (
-          ''
-        )}
+            ''
+          )}
       </div>
       <div className="slds-col slds-size_1-of-12">
         <LoginPanel />

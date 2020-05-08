@@ -6,9 +6,11 @@ const authRoutes = require('./authRoutes');
 const mongoDBRoutes = require('./mongoDBRoutes');
 const postgresRoutes = require('./postgresRoutes');
 
-router.use('/test', testRoutes);
-router.use('/auth', authRoutes);
-router.use('/mongodb', mongoDBRoutes);
-router.use('/postgres', postgresRoutes);
+module.exports = (io) => {
+  router.use('/test', testRoutes);
+  router.use('/auth', authRoutes(io));
+  router.use('/mongodb', mongoDBRoutes);
+  router.use('/postgres', postgresRoutes);
 
-module.exports = router;
+  return router;
+};
