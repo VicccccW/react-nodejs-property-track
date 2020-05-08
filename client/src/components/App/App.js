@@ -17,7 +17,9 @@ const App = () => {
   const { auth, authInSuccess, authExpire, sfEvent, sfEventAddNew, sfEventRemoveOld } = useGlobalState();
   const [socketConn, setSocketConn] = useState(false);
 
-  const ENDPOINT = 'http://127.0.0.1:9000';
+  const ENDPOINT = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:9000'
+    : `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
 
   /**
    * invoke only when app first render

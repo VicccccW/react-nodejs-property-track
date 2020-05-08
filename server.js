@@ -70,10 +70,10 @@ const sessionHandler = session({
 app.use(sessionHandler);
 
 // //for https dev mode
-// https.createServer({
+// const server = https.createServer({
 //     key: fs.readFileSync(path.resolve(__dirname, 'cert/server.key')),
 //     cert: fs.readFileSync(path.resolve(__dirname, 'cert/server.crt'))
-// }, app).listen(port, () => console.log('API server listening on port: ' + port));
+// }, app);
 // app.listen(port, () => console.log('API server listening on port: ' + port));
 const server = http.createServer(app);
 
